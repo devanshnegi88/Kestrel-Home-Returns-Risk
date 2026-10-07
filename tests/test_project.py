@@ -42,3 +42,4 @@ def test_api_health_and_prediction():
     assert 0 <= body["return_risk_score"] <= 1
     assert body["risk_band"] in {"standard", "call", "high"}
     assert 1 <= len(body["reasons"]) <= 4
+print("API prediction test passed successfully.")
