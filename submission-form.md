@@ -48,11 +48,4 @@ Built and tested with local Python tooling, CatBoost, scikit-learn, FastAPI and 
 - Separated policy economics from arbitrary classification thresholds.
 - Did not manufacture a 95% accuracy claim.
 
-## 8. Clean-machine start
 
-```bash
-pip install -r requirements.txt
-uvicorn app.main:app --host 127.0.0.1 --port 8000
-```
-
-Open `http://127.0.0.1:8000/`. API example: `examples/predict.json`.
