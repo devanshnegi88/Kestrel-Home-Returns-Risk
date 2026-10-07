@@ -1,0 +1,18 @@
+{
+  "order_id": "DEMO-001",
+  "order_placed_at": "2026-07-01 10:30",
+  "customer_id": "KC105196",
+  "sku": "KH-IC-03",
+  "sales_channel": "web",
+  "payment_mode": "prepaid_upi",
+  "discount_pct": 13,
+  "qty": 1,
+  "order_value_inr": 3521.76,
+  "promised_delivery_days": 7,
+  "delivery_pincode": 440378,
+  "is_gift": "N",
+  "customer_prior_orders": 2,
+  "customer_prior_returns": 1,
+  "delivery_note": "Office address, weekdays only",
+  "source": "crm"
+}

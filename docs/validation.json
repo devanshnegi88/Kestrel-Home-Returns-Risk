@@ -1,0 +1,187 @@
+{
+  "data": {
+    "train_rows_raw": 11155,
+    "historical_unique_orders": 10504,
+    "historical_duplicate_rows_removed": 651,
+    "test_rows": 2096,
+    "return_rate_raw": 0.11358135365307037,
+    "return_rate_unique_history": 0.11424219345011424,
+    "validation_cut": "2026-04-02 00:23:00",
+    "fit_rows": 8403,
+    "validation_rows": 2101
+  },
+  "leakage_audit": {
+    "excluded": [
+      "pickup_scheduled_at",
+      "last_service_event_type"
+    ],
+    "reason": "Historical returned rows contain reverse-pickup service information; these fields can occur after a return starts and are unavailable for a clean dispatch-time prediction.",
+    "raw_date_fields_removed": [
+      "order_placed_at",
+      "signup_date",
+      "launch_date"
+    ],
+    "target_removed": [
+      "returned"
+    ]
+  },
+  "model": {
+    "type": "50/50 probability blend of CatBoost and regularized Logistic Regression",
+    "catboost_iterations": 128,
+    "catboost_depth": 7,
+    "logistic_C": 0.2,
+    "blend_weight_catboost": 0.5,
+    "blend_weight_logistic": 0.5,
+    "feature_count": 70
+  },
+  "component_metrics": {
+    "catboost": {
+      "accuracy_at_0.50": 0.8914802475011899,
+      "precision_at_0.50": 0.8181818181818182,
+      "recall_at_0.50": 0.0743801652892562,
+      "f1_at_0.50": 0.13636363636363635,
+      "roc_auc": 0.7745899999555435,
+      "pr_auc": 0.3976779394932351,
+      "brier": 0.08691196441015633
+    },
+    "logistic_regression": {
+      "accuracy_at_0.50": 0.8943360304616849,
+      "precision_at_0.50": 0.7,
+      "recall_at_0.50": 0.1446280991735537,
+      "f1_at_0.50": 0.23972602739726026,
+      "roc_auc": 0.7769484171264209,
+      "pr_auc": 0.3999496799437315,
+      "brier": 0.08601770391564109
+    },
+    "blend": {
+      "accuracy_at_0.50": 0.8933841028081866,
+      "precision_at_0.50": 0.78125,
+      "recall_at_0.50": 0.10330578512396695,
+      "f1_at_0.50": 0.18248175182481752,
+      "roc_auc": 0.779046763789294,
+      "pr_auc": 0.4067304727754232,
+      "brier": 0.08585754157429054
+    }
+  },
+  "overall": {
+    "accuracy_at_0.50": 0.8933841028081866,
+    "precision_at_0.50": 0.78125,
+    "recall_at_0.50": 0.10330578512396695,
+    "f1_at_0.50": 0.18248175182481752,
+    "roc_auc": 0.779046763789294,
+    "pr_auc": 0.4067304727754232,
+    "brier": 0.08585754157429054,
+    "majority_baseline_accuracy": 0.8848167539267016,
+    "best_validation_accuracy": 0.8962398857686816,
+    "best_validation_accuracy_threshold": 0.455
+  },
+  "threshold_metrics": [
+    {
+      "threshold": 0.112,
+      "accuracy": 0.7287006187529748,
+      "precision": 0.2453416149068323,
+      "recall": 0.6528925619834711,
+      "f1": 0.35665914221218964,
+      "true_negatives": 1373,
+      "false_positives": 486,
+      "false_negatives": 84,
+      "true_positives": 158
+    },
+    {
+      "threshold": 0.2,
+      "accuracy": 0.8495954307472632,
+      "precision": 0.36879432624113473,
+      "recall": 0.4297520661157025,
+      "f1": 0.3969465648854962,
+      "true_negatives": 1681,
+      "false_positives": 178,
+      "false_negatives": 138,
+      "true_positives": 104
+    },
+    {
+      "threshold": 0.3,
+      "accuracy": 0.8857686815802,
+      "precision": 0.5074626865671642,
+      "recall": 0.2809917355371901,
+      "f1": 0.3617021276595745,
+      "true_negatives": 1793,
+      "false_positives": 66,
+      "false_negatives": 174,
+      "true_positives": 68
+    },
+    {
+      "threshold": 0.4,
+      "accuracy": 0.8924321751546882,
+      "precision": 0.6212121212121212,
+      "recall": 0.16942148760330578,
+      "f1": 0.2662337662337662,
+      "true_negatives": 1834,
+      "false_positives": 25,
+      "false_negatives": 201,
+      "true_positives": 41
+    },
+    {
+      "threshold": 0.5,
+      "accuracy": 0.8933841028081866,
+      "precision": 0.78125,
+      "recall": 0.10330578512396695,
+      "f1": 0.18248175182481752,
+      "true_negatives": 1852,
+      "false_positives": 7,
+      "false_negatives": 217,
+      "true_positives": 25
+    }
+  ],
+  "business_thresholds": [
+    {
+      "threshold": 0.11180124223602485,
+      "orders_flagged": 646,
+      "observed_returns_in_flagged_set": 158,
+      "estimated_returns_prevented": 55.3,
+      "gross_return_cost_avoided_inr": 63595.0,
+      "call_cost_inr": 29070.0,
+      "net_value_inr": 34525.0,
+      "observed_return_rate_in_flagged_set": 0.24458204334365324
+    },
+    {
+      "threshold": 0.2,
+      "orders_flagged": 282,
+      "observed_returns_in_flagged_set": 104,
+      "estimated_returns_prevented": 36.4,
+      "gross_return_cost_avoided_inr": 41860.0,
+      "call_cost_inr": 12690.0,
+      "net_value_inr": 29170.0,
+      "observed_return_rate_in_flagged_set": 0.36879432624113473
+    },
+    {
+      "threshold": 0.3,
+      "orders_flagged": 134,
+      "observed_returns_in_flagged_set": 68,
+      "estimated_returns_prevented": 23.799999999999997,
+      "gross_return_cost_avoided_inr": 27369.999999999996,
+      "call_cost_inr": 6030.0,
+      "net_value_inr": 21339.999999999996,
+      "observed_return_rate_in_flagged_set": 0.5074626865671642
+    },
+    {
+      "threshold": 0.4,
+      "orders_flagged": 66,
+      "observed_returns_in_flagged_set": 41,
+      "estimated_returns_prevented": 14.35,
+      "gross_return_cost_avoided_inr": 16502.5,
+      "call_cost_inr": 2970.0,
+      "net_value_inr": 13532.5,
+      "observed_return_rate_in_flagged_set": 0.6212121212121212
+    },
+    {
+      "threshold": 0.5,
+      "orders_flagged": 32,
+      "observed_returns_in_flagged_set": 25,
+      "estimated_returns_prevented": 8.75,
+      "gross_return_cost_avoided_inr": 10062.5,
+      "call_cost_inr": 1440.0,
+      "net_value_inr": 8622.5,
+      "observed_return_rate_in_flagged_set": 0.78125
+    }
+  ]
+}
